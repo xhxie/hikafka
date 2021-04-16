@@ -7,12 +7,12 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
 @SpringBootApplication
 
-public class KafkaApplication {
+public class HikKafkaApplication {
     @Autowired
     private KafkaProperties kafkaProperties;
     
 	public static void main(String[] args) {
-		SpringApplication.run(KafkaApplication.class, args);
+		SpringApplication.run(HikKafkaApplication.class, args);
 	}
 
 }

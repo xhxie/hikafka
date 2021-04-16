@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.UUID;
@@ -33,17 +34,20 @@ public class FaceRepository {
 	 * @param
 	 * @param
 	 */
-	public void insert(String preparedStatement, UUID faceId, UUID vaEngineId, UUID cameraId, UUID lensId,
-			String camera_name, String cameraAddress, double cameraLat, double cameraLng,
-			ZonedDateTime timestampVapReceived, ZonedDateTime timestampVaDetected, float height, float width, float x, float y,
-			String faceTrackingId, float faceConfidence, int faceAgeMin, int faceAgeMax, float faceAgeConfidence,
-			String face_gender, float faceGenderConfidence, String faceSkinColor, float faceSkinColorConfidence,
-			String imageUrlScene, String imageUrlFace, String modelData) {
+	public void insert(String preparedStatement, UUID vaEngineId, UUID cameraId, UUID lensId, String camera_name,
+			String cameraAddress, double cameraLat, double cameraLng, ZonedDateTime timestampVaDetected,
+			ZonedDateTime timestampVapReceived, float height, float width, float x, float y, String faceTrackingId,
+			float faceConfidence, int faceAgeMin, int faceAgeMax, float faceAgeConfidence, String face_gender,
+			float faceGenderConfidence, String faceSkinColor, float faceSkinColorConfidence, String imageUrlScene,
+			String imageUrlFace, String modelData) {
 		PreparedStatement prepared = session.prepare(preparedStatement);
-		BoundStatement bound = prepared.bind(faceId, vaEngineId, cameraId, lensId, camera_name, cameraAddress,
-				cameraLat, cameraLng, timestampVapReceived, timestampVaDetected, height, width, x, y, faceTrackingId,
-				faceConfidence, faceAgeMin, faceAgeMax, faceAgeConfidence, face_gender, faceGenderConfidence,
-				faceSkinColor, faceSkinColorConfidence, imageUrlScene, imageUrlFace, modelData).setIdempotent(true);
+		BoundStatement bound = prepared
+				.bind(vaEngineId, cameraId, lensId, camera_name, cameraAddress, cameraLat, cameraLng,
+						timestampVaDetected,timestampVapReceived, 
+						height, width, x, y, faceTrackingId,
+						faceConfidence, faceAgeMin, faceAgeMax, faceAgeConfidence, face_gender, faceGenderConfidence,
+						faceSkinColor, faceSkinColorConfidence, imageUrlScene, imageUrlFace, modelData)
+				.setIdempotent(true);
 		session.execute(bound);
 	}
 
@@ -54,11 +58,11 @@ public class FaceRepository {
 	 */
 	public String prepareInsertStatement() {
 		final String insertStatement = "INSERT INTO " + keyspace + "." + table
-				+ " (id_face, id_va_engine_ref, id_camera_ref, id_lens_ref, camera_name,camera_address,camera_lat,camera_lng, "
-				+ "timestamp_vap_received, timestamp_va_detected, detection_rect_height_percent, detection_rect_width_percent, "
+				+ " (id_va_engine_ref, id_camera_ref, id_lens_ref, camera_name,camera_address,camera_lat,camera_lng, "
+				+ "timestamp_va_detected, timestamp_vap_detected, detection_rect_height_percent, detection_rect_width_percent, "
 				+ "detection_rect_x_percent, detection_rect_y_percent, face_tracking_id, face_confidence, face_age_min,face_age_max, face_age_confidence,"
 				+ "face_gender, face_gender_confidence, face_skin_color_value, face_skin_color_confidence, "
-				+ "image_url_scene, image_url_face, model_data) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "image_url_scene, image_url_face, model_data) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		return insertStatement;
 	}

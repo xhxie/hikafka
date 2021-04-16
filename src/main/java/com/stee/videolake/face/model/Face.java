@@ -1,6 +1,7 @@
 package com.stee.videolake.face.model;
 
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,8 +13,8 @@ public class Face {
 	private String cameraName;
 	private String regionId;
 
-	private Timestamp timestampVapReceived;
-	private Date timestampVaDetected;
+	private ZonedDateTime timestampVapReceived;
+	private ZonedDateTime timestampVaDetected;
 
 	private String faceTrackId;
 	private float faceConfidence;
@@ -76,19 +77,19 @@ public class Face {
 		this.cameraName = cameraName;
 	}
 
-	public Timestamp getTimestampVapReceived() {
+	public ZonedDateTime getTimestampVapReceived() {
 		return timestampVapReceived;
 	}
 
-	public void setTimestampVapReceived(Timestamp timestampVapReceived) {
+	public void setTimestampVapReceived(ZonedDateTime timestampVapReceived) {
 		this.timestampVapReceived = timestampVapReceived;
 	}
 
-	public Date getTimestampVaDetected() {
+	public ZonedDateTime getTimestampVaDetected() {
 		return timestampVaDetected;
 	}
 
-	public void setTimestampVaDetected(Date timestampVaDetected) {
+	public void setTimestampVaDetected(ZonedDateTime timestampVaDetected) {
 		this.timestampVaDetected = timestampVaDetected;
 	}
 

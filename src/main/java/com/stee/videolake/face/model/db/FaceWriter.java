@@ -21,28 +21,28 @@ public class FaceWriter extends Thread {
 	private final static Logger logger = LoggerFactory.getLogger("FaceWriter");
 
 	public FaceWriter(int noRec, CqlSession session) {
-		faceRepo = new FaceRepository(session, "videolake2", "face");
+		faceRepo = new FaceRepository(session, "videolake2", "laapface");
 		preparedStatement = faceRepo.prepareInsertStatement();
 		this.noRec = noRec;
 	}
 
 	public FaceWriter(List<Face> faceList, CqlSession session) {
-		faceRepo = new FaceRepository(session, "videolake2", "face");
+		faceRepo = new FaceRepository(session, "videolake2", "laapface");
 		preparedStatement = faceRepo.prepareInsertStatement();
 		this.faceList = faceList;
 	}
 
 	public void run() {
-		//logger.info("Face writer : Start to process " + faceList.size() + " records... " + new Date());
-		for (Face face : faceList) {		
-			faceRepo.insert(preparedStatement, face.getFaceId(), UUID.randomUUID(), UUID.randomUUID(),
-					UUID.randomUUID(), "Camera1", "JE Level 9", (float) 103.011, (float) 1.04356,
-					ZonedDateTime.parse("2021-01-11T19:12:44.402+08:00"),
-					ZonedDateTime.parse("2020-11-07T16:50:52.433395762Z"), face.getHeight(), face.getWidth(),
-					face.getRectX(), face.getRectY(), face.getFaceTrackId(), face.getFaceConfidence(),
-					face.getFaceAgeMin(), face.getFaceAgeMax(), face.getFaceAgeConfidence(), face.getGender(),
-					face.getGenderConfidence(), face.getSkinColor(), face.getSkinColorConfidence(),
-					face.getImageUrlScene(), face.getImageUrlScene(), face.getModelData());
+		// logger.info("Face writer : Start to process " + faceList.size() + "
+		// records... " + new Date());
+		for (Face face : faceList) {
+			faceRepo.insert(preparedStatement, UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), "Camera1",
+					"JE Level 9", (float) 103.011, (float) 1.04356, face.getTimestampVaDetected(),
+					ZonedDateTime.now(), face.getHeight(), face.getWidth(), face.getRectX(), face.getRectY(),
+					face.getFaceTrackId(), face.getFaceConfidence(), face.getFaceAgeMin(), face.getFaceAgeMax(),
+					face.getFaceAgeConfidence(), face.getGender(), face.getGenderConfidence(), face.getSkinColor(),
+					face.getSkinColorConfidence(), face.getImageUrlScene(), face.getImageUrlScene(),
+					face.getModelData());
 		}
 
 		/*

@@ -1,17 +1,7 @@
 spring:
   kafka:
-    bootstrap-servers: videolake.servicebus.windows.net:9093
+    bootstrap-servers: 52.226.3.144:9092
     client-id: FaceConsumer
-    properties:
-      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="$ConnectionString" password="Endpoint=sb://videolake.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=DICpm7W0H0yhOI3vElaCh0a51l+TR1BGKwpHbi6tFxU=";
-      sasl.mechanism: PLAIN
-      security.protocol: SASL_SSL
-    consumer:
-      group-id: face_cg
-      properties:
-        spring.json:
-          use.type.headers: false
-          value.default.type: com.stee.videolake.kafka.ConsumerMessage
  
 topics:
-  subscriber: face
+  subscriber: SNAP_IMAGE_INFO_TOPICS
