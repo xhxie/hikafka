@@ -67,7 +67,7 @@ public class FaceConsumer {
 	 * 
 	 */
 	private Face parseFace(String faceMessage) {
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+		//SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 		ObjectMapper objectMapper = new ObjectMapper();
 		Face face = null;
 		try {
