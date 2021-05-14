@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stee.videolake.face.model.Face;
 import com.stee.videolake.face.model.db.FaceWriter;
 import com.stee.videolake.util.CassandraUtils;
-
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 @Service
 @Slf4j
 public class FaceConsumer {
@@ -32,6 +33,9 @@ public class FaceConsumer {
 	private CqlSession cqlSession;
 	private static final int FACE_BUFFER_SIZE = 1;
 	private List<Face> faceList;
+	
+	@Autowired
+	SimpMessagingTemplate template;
 
 	public FaceConsumer() {
 		CassandraUtils utils = new CassandraUtils();
@@ -60,6 +64,7 @@ public class FaceConsumer {
 			}
 		}
 
+		template.convertAndSend("/topic/faces", consumerMessage);
 	}
 
 	/*
