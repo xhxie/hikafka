@@ -1,4 +1,4 @@
-package com.stee.videolake.websocket;
+package com.stee.videolake.kafka;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
