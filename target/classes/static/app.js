@@ -39,11 +39,11 @@ function sendName() {
 
 function showGreeting(message) {
 	var myObj = JSON.parse(message);
-    $("#greetings").append("<tr><td>Gender</td><td>" + myObj.captureLibResult[0].faces[0].gender.value + "</td></tr>");
-    $("#greetings").append("<tr><td>Age Group</td><td>" + myObj.captureLibResult[0].faces[0].age.ageGroup + "</td></tr>");
-    $("#greetings").append("<tr><td>Glass</td><td>" + myObj.captureLibResult[0].faces[0].glass.value + "</td></tr>");
-    $("#greetings").append("<tr><td>Mask</td><td>" + myObj.captureLibResult[0].faces[0].mask.value + "</td></tr>");
     $("#greetings").append("<tr><td><img src='" + myObj.captureLibResult[0].image + "'></td></tr>");
+    $("#greetings").append("<tr><td>Gender</td><td>" + myObj.captureLibResult[0].faces[0].gender.value.toUpperCase() + "</td></tr>");
+    $("#greetings").append("<tr><td>Age Group</td><td>" + myObj.captureLibResult[0].faces[0].age.ageGroup.toUpperCase() + "</td></tr>");
+    $("#greetings").append("<tr><td>Glass</td><td>" + myObj.captureLibResult[0].faces[0].glass.value.toUpperCase() + "</td></tr>");
+    $("#greetings").append("<tr><td>Mask</td><td>" + myObj.captureLibResult[0].faces[0].mask.value.toUpperCase() + "</td></tr>");
     //$("#greetings").append("<tr><td><img src='" + "https://www.w3schools.com/images/lamp.jpg" + "'></td></tr>");
 }
 
