@@ -25,6 +25,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stee.videolake.face.model.Face;
 import com.stee.videolake.face.model.db.FaceWriter;
 import com.stee.videolake.util.CassandraUtils;
+
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 @Service
 @Slf4j
@@ -35,7 +37,7 @@ public class FaceConsumer {
 	private List<Face> faceList;
 	
 	@Autowired
-	SimpMessagingTemplate template;
+    private SimpMessageSendingOperations messagingSendingOperations;
 
 	public FaceConsumer() {
 		CassandraUtils utils = new CassandraUtils();
@@ -64,7 +66,7 @@ public class FaceConsumer {
 			}
 		}
 
-		template.convertAndSend("/topic/faces", consumerMessage);
+		messagingSendingOperations.convertAndSend("/topic/faces", consumerMessage);
 	}
 
 	/*
