@@ -39,7 +39,7 @@ function sendName() {
 
 function showGreeting(message) {
 	var myObj = JSON.parse(message);
-    $("#greetings").append("<tr><td><img src='" + myObj.captureLibResult[0].image + "'></td></tr>");
+    $("#greetings").append("<tr><td><img src='" + myObj.captureLibResult[0].image + "'  width='144' height='144'></td></tr>");
     $("#greetings").append("<tr><td>Gender</td><td>" + myObj.captureLibResult[0].faces[0].gender.value.toUpperCase() + "</td></tr>");
     $("#greetings").append("<tr><td>Age Group</td><td>" + myObj.captureLibResult[0].faces[0].age.ageGroup.toUpperCase() + "</td></tr>");
     $("#greetings").append("<tr><td>Glass</td><td>" + myObj.captureLibResult[0].faces[0].glass.value.toUpperCase() + "</td></tr>");
