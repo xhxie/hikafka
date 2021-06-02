@@ -1,6 +1,6 @@
 spring:
   kafka:
-    bootstrap-servers: 52.226.3.144:9092
+    bootstrap-servers: 20.198.192.92:9092
     client-id: FaceConsumer
  
 topics:
