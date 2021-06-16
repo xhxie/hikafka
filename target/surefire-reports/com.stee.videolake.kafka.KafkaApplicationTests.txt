@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.stee.videolake.kafka.KafkaApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.948 s - in com.stee.videolake.kafka.KafkaApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.187 s - in com.stee.videolake.kafka.KafkaApplicationTests

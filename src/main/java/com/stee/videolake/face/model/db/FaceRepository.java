@@ -41,14 +41,55 @@ public class FaceRepository {
 			float faceGenderConfidence, String faceSkinColor, float faceSkinColorConfidence, String imageUrlScene,
 			String imageUrlFace, String modelData) {
 		PreparedStatement prepared = session.prepare(preparedStatement);
-		BoundStatement bound = prepared
-				.bind(vaEngineId, cameraId, lensId, camera_name, cameraAddress, cameraLat, cameraLng,
-						timestampVaDetected,timestampVapReceived, 
-						height, width, x, y, faceTrackingId,
-						faceConfidence, faceAgeMin, faceAgeMax, faceAgeConfidence, face_gender, faceGenderConfidence,
-						faceSkinColor, faceSkinColorConfidence, imageUrlScene, imageUrlFace, modelData)
+		BoundStatement bound = prepared.bind(vaEngineId, cameraId, lensId, camera_name, cameraAddress, cameraLat,
+				cameraLng, timestampVaDetected, timestampVapReceived, height, width, x, y, faceTrackingId,
+				faceConfidence, faceAgeMin, faceAgeMax, faceAgeConfidence, face_gender, faceGenderConfidence,
+				faceSkinColor, faceSkinColorConfidence, imageUrlScene, imageUrlFace, modelData).setIdempotent(true);
+		session.execute(bound);
+	}
+
+	/**
+	 * Insert a row into face table for load test
+	 *
+	 * @param id
+	 * @param
+	 * @param
+	 */
+	public void insertFace(String preparedStatement, UUID vapEventId, String vaEngineEventId, UUID tenantIdRef,
+			UUID vaEngineIdRef, String cameraId, UUID lensId, String tenantName, String vaEngineName, String camera_name,
+			String cameraAddress, double cameraLat, double cameraLng, ZonedDateTime timestampVaDetected,
+			ZonedDateTime timestampVapReceived, float height, float width, float x, float y, String faceTrackingId,
+			float faceConfidence, int faceAgeMin, int faceAgeMax, float faceAgeConfidence, String face_gender,
+			float faceGenderConfidence, String faceSkinColor, float faceSkinColorConfidence, String hasScar,
+			String hasSideburn, String hasMoustache, String hasBeard, String imageUrlScene, String imageUrlFace,
+			String modelData, int timeInVideo) {
+		PreparedStatement prepared = session.prepare(preparedStatement);
+		BoundStatement bound = prepared.bind(vapEventId, vaEngineEventId, tenantIdRef, vaEngineIdRef, cameraId, lensId,
+				tenantName, vaEngineName, camera_name, cameraAddress, cameraLat, cameraLng, timestampVaDetected,
+				timestampVapReceived, height, width, x, y, faceTrackingId, faceConfidence, faceAgeMin, faceAgeMax,
+				faceAgeConfidence, face_gender, faceGenderConfidence, faceSkinColor, faceSkinColorConfidence, hasScar,
+				hasSideburn, hasMoustache, hasBeard, imageUrlScene, imageUrlFace, modelData, timeInVideo)
 				.setIdempotent(true);
 		session.execute(bound);
+	}
+
+	/**
+	 * Create a PrepareStatement to insert a row to face table
+	 *
+	 * @return PreparedStatement
+	 */
+	public String prepareInsertStatementForLoadTest() {
+		final String insertStatement = "INSERT INTO " + keyspace + "." + "face"
+				+ " (id_event_vap, id_event_va_engine, id_tenant_ref, id_va_engine_ref, id_camera_ref, id_lens_ref, tenant_name, va_engine_name, "
+				+ "camera_name,camera_address,camera_lat,camera_lng, "
+				+ "timestamp_vap_detected, timestamp_va_detected, detection_rect_height_percent, detection_rect_width_percent, "
+				+ "detection_rect_x_percent, detection_rect_y_percent, face_tracking_id, face_confidence, face_age_min,face_age_max, face_age_confidence,"
+				+ "face_gender, face_gender_confidence, face_skin_color_value, face_skin_color_confidence, "
+				+ "has_scars, has_sideburns, has_moustache, has_beard,"
+				+ "image_url_scene, image_url_face, model_data,time_in_video) VALUES "
+				+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+		return insertStatement;
 	}
 
 	/**

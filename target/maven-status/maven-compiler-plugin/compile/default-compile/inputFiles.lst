@@ -6,5 +6,6 @@ C:\projects\LaaP-workspace\hikafka\src\main\java\com\stee\videolake\kafka\FaceCo
 C:\projects\LaaP-workspace\hikafka\src\main\java\com\stee\videolake\face\model\db\FaceWriter.java
 C:\projects\LaaP-workspace\hikafka\src\main\java\com\stee\videolake\face\model\db\FaceRepository.java
 C:\projects\LaaP-workspace\hikafka\src\main\java\com\stee\videolake\kafka\ConsumerMessage.java
+C:\projects\LaaP-workspace\hikafka\src\main\java\com\stee\videolake\kafka\WebSocketConfig.java
 C:\projects\LaaP-workspace\hikafka\src\main\java\com\stee\videolake\util\CassandraUtils.java
 C:\projects\LaaP-workspace\hikafka\src\main\java\com\stee\videolake\face\model\Face.java

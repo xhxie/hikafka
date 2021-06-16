@@ -1,0 +1,7 @@
+spring:
+  kafka:
+    bootstrap-servers: 20.198.192.92:9092
+    client-id: FaceConsumer
+ 
+topics:
+  subscriber: SNAP_IMAGE_INFO_TOPICS
